@@ -1,17 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Tutorial.SqlConn;
 using MySql.Data.MySqlClient;
 
@@ -146,7 +134,9 @@ namespace ProjectX
                         case MessageBoxResult.Yes:
                             emailBox.Text = "";
 
-                            //Add feature...
+                            passRecWindow w = new passRecWindow();
+                            w.Show();
+                            Close();
 
                             break;
                         case MessageBoxResult.No:
@@ -207,6 +197,13 @@ namespace ProjectX
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             conn.Close();
+        }
+
+        private void AutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            logInWindow w = new logInWindow();
+            w.Show();
+            Close();
         }
     }
 }

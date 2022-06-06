@@ -30,5 +30,12 @@ namespace ProjectX
             a.Show();
             Close();
         }
+
+        private void RegBtn_Click(object sender, RoutedEventArgs e)
+        {
+            logInWindow w = new logInWindow();
+            w.Show();
+            Close();
+        }
     }
 }

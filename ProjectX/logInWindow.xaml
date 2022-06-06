@@ -5,8 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectX"
         mc:Ignorable="d"
-        Title="logInWindow" Height="450" Width="800">
+        Title="Log In" MaxHeight="1080" MaxWidth="2048" MinHeight="240" MinWidth="400" Closing="Window_Closing">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black" Offset="0"/>
+            <GradientStop Color="#FF8E40FF" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="loginBox" Grid.ColumnSpan="10" Grid.Column="3" Height="45" Margin="0,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="28"/>
+        <PasswordBox x:Name="passwordBox" Grid.ColumnSpan="10" Grid.Column="3" Height="45" Margin="0,231,0,0" PasswordChar="*" VerticalAlignment="Top" FontSize="28"/>
+        <Button x:Name="regBtn" Grid.ColumnSpan="10" Content="Log In" Grid.Column="3" Height="39" Margin="0,342,0,0" VerticalAlignment="Top" FontSize="26" FontWeight="Bold" Background="#FFCFBEEE" Click="RegBtn_Click"/>
+        <Button x:Name="newAccBtn" Grid.ColumnSpan="5" Content="New account" Grid.Column="3" Height="42" Margin="0,399,25,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Background="#FFCFBEEE" Click="NewAccBtn_Click"/>
+        <Button x:Name="fogPasscBtn" Grid.ColumnSpan="5" Content="Forgot password" Grid.Column="8" Height="42" Margin="25,399,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Background="#FFCFBEEE" Click="FogPasscBtn_Click"/>
+        <Label x:Name="logL" Content="Email or login" Grid.Column="3" Foreground="White" Margin="0,117,0,0" VerticalAlignment="Top" Height="29" Grid.ColumnSpan="3" FontSize="16" FontWeight="Bold"/>
+        <Label x:Name="passL" Content="Password" Grid.Column="3" Foreground="White" Margin="0,197,10,0" VerticalAlignment="Top" Height="29" Grid.ColumnSpan="2" FontSize="16" FontWeight="Bold"/>
+        <CheckBox Content="Remember and log in automatically" Grid.Column="3" Margin="0,281,0,0" VerticalAlignment="Top" Height="20" Grid.ColumnSpan="10" FontSize="16" FontWeight="Bold" Foreground="White"/>
     </Grid>
 </Window>
