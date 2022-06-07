@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using Tutorial.SqlConn;
 using System.Windows;
+using System.IO;
 
 namespace ProjectX
 {
@@ -40,6 +41,28 @@ namespace ProjectX
 
                 if (password == dbPassword)
                 {
+                    if (saveCB.IsChecked == true)
+                    {
+                        string path = "conf/config.txt";
+                        string data = $"{le}?{password}";
+
+                        FileStream fs = new FileStream(path, FileMode.Create);
+                        StreamWriter sw = new StreamWriter(fs);
+
+                        sw.WriteLine(data);
+                        sw.Close();
+                    }
+                    else
+                    {
+                        string path = "conf/config.txt";
+
+                        FileStream fs = new FileStream(path, FileMode.Create);
+                        StreamWriter sw = new StreamWriter(fs);
+
+                        sw.WriteLine("");
+                        sw.Close();
+                    }
+
                     programWindow w = new programWindow();
                     w.Show();
                     Close();

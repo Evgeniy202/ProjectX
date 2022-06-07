@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace ProjectX
 {
-    /// <summary>
-    /// Логика взаимодействия для programWindow.xaml
-    /// </summary>
     public partial class programWindow : Window
     {
         public programWindow()
