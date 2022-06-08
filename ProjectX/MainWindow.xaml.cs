@@ -1,19 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using Tutorial.SqlConn;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ProjectX
 {
@@ -47,20 +36,53 @@ namespace ProjectX
 
                 if (line != "")
                 {
+                    MySqlDataReader datas;
+                    string dbId = null;
+                    string login = null;
+
                     string[] data = line.Split('?');
 
                     MySqlConnection conn = DBUtils.GetDBConnection();
                     conn.Open();
 
-                    string query = $"SELECT login FROM baseDataUsers WHERE " +
+                    string query = $"SELECT id, login FROM baseDataUsers WHERE " +
                         $"login = '{data[0]}' OR email = '{data[0]}' AND password = '{data[1]}'";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
 
-                    if (cmd.ExecuteScalar().ToString() != "")
+                    try
                     {
+                        datas = cmd.ExecuteReader();
+
+                        while (datas.Read())
+                        {
+                            dbId = datas[0].ToString();
+                            login = datas[1].ToString();
+                        }
+                    }
+                    catch { datas = null; }
+
+                    if (login != null)
+                    {
+                        string path = "conf/data.txt";
+                        string str = $"{data[0]}?{data[1]}";
+
+                        FileStream fs = new FileStream(path, FileMode.Create);
+                        StreamWriter sw = new StreamWriter(fs);
+
+                        sw.WriteLine(str);
+                        sw.Close();
+
                         programWindow w = new programWindow();
                         w.Show();
                         Close();
+                        path = "conf/data.txt";
+                        str = $"{dbId}?{login}?{data[1]}";
+
+                        fs = new FileStream(path, FileMode.Create);
+                        sw = new StreamWriter(fs);
+
+                        sw.WriteLine(data);
+                        sw.Close();
                     }
 
                     conn.Close();

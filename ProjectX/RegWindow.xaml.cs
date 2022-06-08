@@ -2,6 +2,9 @@
 using System.Windows;
 using Tutorial.SqlConn;
 using MySql.Data.MySqlClient;
+using System.Net.Mail;
+using ProjectX.Classes;
+using System.Net;
 
 namespace ProjectX
 {
@@ -61,34 +64,43 @@ namespace ProjectX
                                 MessageBoxImage.Asterisk
                             );
 
-                            if (result == MessageBoxResult.OK)
+                            var rand = new Random();
+
+                            for (int i = 0; i < 6; i++)
                             {
-                                var rand = new Random();
-
-                                for (int i = 0; i < 6; i++)
-                                {
-                                    int num = rand.Next(9);
-                                    code = code + Convert.ToString(num);
-                                }
-
-                                //Feature add send in Email...
-                                Console.WriteLine(code);
-
-                                lL.Visibility = Visibility.Hidden;
-                                emL.Visibility = Visibility.Hidden;
-                                pL.Visibility = Visibility.Hidden;
-                                rPL.Visibility = Visibility.Hidden;
-                                autBtn.Visibility = Visibility.Hidden;
-                                regBtn.Visibility = Visibility.Hidden;
-                                loginBox.Visibility = Visibility.Hidden;
-                                passwordBox.Visibility = Visibility.Hidden;
-                                repPassBox.Visibility = Visibility.Hidden;
-                                emailBox.Visibility = Visibility.Hidden;
-
-                                confCodeBox.Visibility = Visibility.Visible;
-                                confCodeBtn.Visibility = Visibility.Visible;
-                                confCodeLabel.Visibility = Visibility.Visible;                               
+                                code += (rand.Next(9)).ToString();
                             }
+
+                            /*EmailSenderClass data = new EmailSenderClass();
+
+                            MailAddress from = new MailAddress(data.email, data.tittle);
+                            MailAddress to = new MailAddress(email);
+                            MailMessage m = new MailMessage(from, to);
+                            m.Subject = "Confirmanation code";
+                            m.Body = $"<h3>Your confirmanation code: {code}</h3>";
+                            m.IsBodyHtml = true;
+                            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                            smtp.Credentials = new NetworkCredential(data.email, data.password);
+                            smtp.EnableSsl = true;
+                            smtp.Send(m);*/
+
+                            Console.WriteLine(code);
+
+                            lL.Visibility = Visibility.Hidden;
+                            emL.Visibility = Visibility.Hidden;
+                            pL.Visibility = Visibility.Hidden;
+                            rPL.Visibility = Visibility.Hidden;
+                            autBtn.Visibility = Visibility.Hidden;
+                            regBtn.Visibility = Visibility.Hidden;
+                            loginBox.Visibility = Visibility.Hidden;
+                            passwordBox.Visibility = Visibility.Hidden;
+                            repPassBox.Visibility = Visibility.Hidden;
+                            emailBox.Visibility = Visibility.Hidden;
+
+                            confCodeBox.Visibility = Visibility.Visible;
+                            confCodeBtn.Visibility = Visibility.Visible;
+                            confCodeLabel.Visibility = Visibility.Visible;                               
+                            
                         }
                         else
                         {

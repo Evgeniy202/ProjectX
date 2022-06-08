@@ -2,6 +2,7 @@
 using Tutorial.SqlConn;
 using System.Windows;
 using System.IO;
+using System;
 
 namespace ProjectX
 {
@@ -29,15 +30,26 @@ namespace ProjectX
             string le = loginBox.Text;
             string password = passwordBox.Password;
 
+            string dbId = null;
             string dbPassword = null;
+            MySqlDataReader datas;
 
             if ((le != "") & (password != ""))
             {
-                string query = $"SELECT password FROM baseDataUsers WHERE login = '{le}' OR email = '{le}'";
+                string query = $"SELECT id, password FROM baseDataUsers WHERE login = '{le}' OR email = '{le}'";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
 
-                try { dbPassword = cmd.ExecuteScalar().ToString(); }
-                catch { dbPassword = null; }
+                try
+                {
+                    datas = cmd.ExecuteReader();
+
+                    while (datas.Read())
+                    {
+                        dbId = datas[0].ToString();
+                        dbPassword = datas[1].ToString();
+                    }
+                }
+                catch { datas = null; }
 
                 if (password == dbPassword)
                 {
@@ -48,6 +60,15 @@ namespace ProjectX
 
                         FileStream fs = new FileStream(path, FileMode.Create);
                         StreamWriter sw = new StreamWriter(fs);
+
+                        sw.WriteLine(data);
+                        sw.Close();
+
+                        path = "conf/data.txt";
+                        data = $"{dbId}?{le}?{password}";
+
+                        fs = new FileStream(path, FileMode.Create);
+                        sw = new StreamWriter(fs);
 
                         sw.WriteLine(data);
                         sw.Close();

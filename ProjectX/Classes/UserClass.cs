@@ -10,5 +10,10 @@ namespace ProjectX
     {
         public string login;
         public string password;
+
+        public void getData()
+        {
+            
+        }
     }
 }
