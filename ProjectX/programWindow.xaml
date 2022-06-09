@@ -5,8 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectX"
         mc:Ignorable="d"
-        Title="programWindow" Height="450" Width="800" Closed="Window_Closed">
-    <Grid>
-        
-    </Grid>
+        Title="ProgramX" MaxHeight="1080" MaxWidth="2048" MinHeight="240" MinWidth="400" Closed="Window_Closed">
+    <Frame x:Name="MainFrame" Background="#FF8E40FF" NavigationUIVisibility="Hidden"/>
 </Window>

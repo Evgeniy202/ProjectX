@@ -20,6 +20,22 @@ namespace ProjectX
         public programWindow()
         {
             InitializeComponent();
+
+            string line = "";
+            try
+            {
+                StreamReader sr = new StreamReader("conf/generalData.txt");
+                line = sr.ReadLine();
+            }
+            catch { line = ""; }
+            if (line != "")
+            {
+                MainFrame.Content = new Pages.mainPage();
+            }
+            else
+            {
+                MainFrame.Content = new Pages.userInf();
+            }
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -29,6 +45,15 @@ namespace ProjectX
 
             FileStream fs = new FileStream(path, FileMode.Create);
             StreamWriter sw = new StreamWriter(fs);
+
+            sw.WriteLine(str);
+            sw.Close();
+
+            path = "conf/generalData.txt";
+            str = "";
+
+            fs = new FileStream(path, FileMode.Create);
+            sw = new StreamWriter(fs);
 
             sw.WriteLine(str);
             sw.Close();

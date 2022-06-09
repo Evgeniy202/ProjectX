@@ -1,0 +1,34 @@
+﻿<Page x:Class="ProjectX.Pages.userInf"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ProjectX.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="userInf" MaxHeight="1080" MaxWidth="2048" MinHeight="240" MinWidth="400">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="first_nameBox" Text="First name..." Grid.ColumnSpan="10" Grid.Column="3" Height="45" Margin="0,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="28" GotFocus="First_nameBox_GotFocus" LostFocus="First_nameBox_LostFocus"/>
+        <TextBox x:Name="last_nameBox" Text="Last name (not necessarily)..." Grid.ColumnSpan="10" Grid.Column="3" Height="45" Margin="0,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="28" GotFocus="Last_nameBox_GotFocus" LostFocus="Last_nameBox_LostFocus"/>
+        <Button x:Name="confBtn" Grid.ColumnSpan="10" Content="Confirm" Grid.Column="3" Height="39" Margin="0,288,0,0" VerticalAlignment="Top" FontSize="26" FontWeight="Bold" Background="#FFCFBEEE" Click="ConfBtn_Click"/>
+    </Grid>
+</Page>

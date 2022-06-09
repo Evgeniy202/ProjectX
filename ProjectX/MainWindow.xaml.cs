@@ -61,10 +61,12 @@ namespace ProjectX
                     }
                     catch { datas = null; }
 
+                    datas.Close();
+
                     if (login != null)
-                    {
+                    {                                  
                         string path = "conf/data.txt";
-                        string str = $"{data[0]}?{data[1]}";
+                        string str = $"{dbId}?{login}?{data[1]}";
 
                         FileStream fs = new FileStream(path, FileMode.Create);
                         StreamWriter sw = new StreamWriter(fs);
@@ -72,17 +74,50 @@ namespace ProjectX
                         sw.WriteLine(str);
                         sw.Close();
 
+                        string first_name = "";
+                        string last_name = "";
+                        query = $"SELECT id, first_name, last_name FROM userInformatin WHERE id = '{dbId}'";
+
+                        try
+                        {
+                            cmd = new MySqlCommand(query, conn);
+                            datas = cmd.ExecuteReader();
+
+                            while (datas.Read())
+                            {
+                                dbId = datas[0].ToString();
+                                first_name = datas[1].ToString();
+                                last_name = datas[2].ToString();
+                            }
+                        }
+                        catch(Exception er) { Console.WriteLine(er);  }
+
+                        if ((first_name != "") & (last_name != ""))
+                        {
+                            path = "conf/generalData.txt";
+                            str = $"{dbId}?{first_name}?{last_name}";
+
+                            fs = new FileStream(path, FileMode.Create);
+                            sw = new StreamWriter(fs);
+
+                            sw.WriteLine(str);
+                            sw.Close();
+                        }
+                        else if ((first_name != "") & (last_name == ""))
+                        {
+                            path = "conf/generalData.txt";
+                            str = $"{dbId}?{first_name}";
+
+                            fs = new FileStream(path, FileMode.Create);
+                            sw = new StreamWriter(fs);
+
+                            sw.WriteLine(str);
+                            sw.Close();
+                        }
+
                         programWindow w = new programWindow();
                         w.Show();
                         Close();
-                        path = "conf/data.txt";
-                        str = $"{dbId}?{login}?{data[1]}";
-
-                        fs = new FileStream(path, FileMode.Create);
-                        sw = new StreamWriter(fs);
-
-                        sw.WriteLine(data);
-                        sw.Close();
                     }
 
                     conn.Close();

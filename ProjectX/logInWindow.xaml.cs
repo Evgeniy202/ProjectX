@@ -51,6 +51,8 @@ namespace ProjectX
                 }
                 catch { datas = null; }
 
+                datas.Close();
+
                 if (password == dbPassword)
                 {
                     if (saveCB.IsChecked == true)
@@ -81,6 +83,47 @@ namespace ProjectX
                         StreamWriter sw = new StreamWriter(fs);
 
                         sw.WriteLine("");
+                        sw.Close();
+                    }
+
+                    string first_name = "";
+                    string last_name = "";
+                    query = $"SELECT id, first_name, last_name WHERE id = '{dbId}'";
+
+                    try
+                    {
+                        cmd = new MySqlCommand(query, conn);
+                        datas = cmd.ExecuteReader();
+
+                        while (datas.Read())
+                        {
+                            dbId = datas[0].ToString();
+                            first_name = datas[1].ToString();
+                            last_name = datas[2].ToString();
+                        }
+                    }
+                    catch { }
+
+                    if ((first_name != "") & (last_name != ""))
+                    {
+                        string path = "conf/generalData.txt";
+                        string str = $"{dbId}?{first_name}?{last_name}";
+
+                        FileStream fs = new FileStream(path, FileMode.Create);
+                        StreamWriter sw = new StreamWriter(fs);
+
+                        sw.WriteLine(str);
+                        sw.Close();
+                    }
+                    else if ((first_name != "") & (last_name == ""))
+                    {
+                        string path = "conf/generalData.txt";
+                        string str = $"{dbId}?{first_name}";
+
+                        FileStream fs = new FileStream(path, FileMode.Create);
+                        StreamWriter sw = new StreamWriter(fs);
+
+                        sw.WriteLine(str);
                         sw.Close();
                     }
 
